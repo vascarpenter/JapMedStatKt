@@ -41,7 +41,14 @@ fun main(args: Array<String>) {
         }
         val bufferedReader = file.bufferedReader(Charset.forName("MS932"))
 
-        conn = DriverManager.getConnection("jdbc:oracle:thin:@//XXXX.XX.XX.XX:1521/XEPDB1", "XXXXX", "XXXXX")
+        // parse OCISTRING env variable and use IP/userid/pass
+        var ocistring = System.getenv("OCISTRING") ?: "user/pass@localhost/XEPDB1"
+        val match = Regex("""^([a-zA-Z0-9]+)/([a-zA-Z0-9]+)@(.*)$""").find(ocistring)
+        var jdbcuser = match!!.groups[1]!!.value
+        var jdbcpass = match!!.groups[2]!!.value
+        var jdbcthinstr = "jdbc:oracle:thin:@//" +  match!!.groups[3]!!.value
+
+        conn = DriverManager.getConnection(jdbcthinstr, jdbcuser, jdbcpass)
 
         bufferedReader.readLines().forEach { line ->
             var linex = line.trim()
