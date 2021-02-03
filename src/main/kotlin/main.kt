@@ -35,13 +35,13 @@ fun main(args: Array<String>) {
         var file: File;
         if( args.size<2)
         {
-            file = File("/Users/gikoha/IdeaProjects/JapMedStatKt/drug20210125.txt")
+            file = File("/tmp/test.txt")
         } else {
             file = File(args[1])
         }
         val bufferedReader = file.bufferedReader(Charset.forName("MS932"))
 
-        conn = DriverManager.getConnection("jdbc:oracle:thin:@//192.168.11.1:1521/XEPDB1", "admin", "hogehogeA00")
+        conn = DriverManager.getConnection("jdbc:oracle:thin:@//XXXX.XX.XX.XX:1521/XEPDB1", "XXXXX", "XXXXX")
 
         bufferedReader.readLines().forEach { line ->
             var linex = line.trim()
