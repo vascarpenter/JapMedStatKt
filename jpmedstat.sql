@@ -1,5 +1,5 @@
 --------------------------------------------------------
---  ファイルを作成しました - 水曜日-2月-03-2021   
+--  ファイルを作成しました - 木曜日-2月-04-2021   
 --------------------------------------------------------
 --------------------------------------------------------
 --  DDL for Table JAPMEDSTAT
@@ -168,6 +168,45 @@ Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('ムコソルバンＬ','8301'
 Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('コニール','2201');
 Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('リバロ','1316');
 Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('ミカムロ','2201');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('ランタス','0810');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('トルリシティ','0810');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('アルファカルシドールカプセル','0962');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('ウルソデオキシコール酸','0322');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('ユリーフ','4906');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('インスリングラルギン','0810');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('ポリフル','0726');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('モーラステープ','7139');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('メチコバール','0901');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('ノイロトロピン','0971');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('リリカ','7101');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('パロキセチン','7301');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('アーガメイトゼリー','0982');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('レニベース','2201');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('イニシンク','0810');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('セルタッチパップ','7139');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('チラーヂン','4412');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('エンレスト','2124');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('アミオダロン塩酸塩','2002');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('メルカゾール','4413');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('アトーゼット','1316');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('センノシド','0416');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('ハーフジゴキシン','2002');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('アカルボース','0836');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('メトホルミン塩酸塩','0836');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('アムロジン','2201');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('アボルブカプセル','4904');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('クラリスロマイシン','5101');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('ワソラン','2002');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('ビムパット','7299');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('イーケプラ','7299');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('ベラプロスト','2402');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('ベサコリン','0038');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('メコバラミン','0901');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('アレンドロン酸','0962');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('フェルビナクテープ','7139');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('オメプラゾール','0001');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('エベレンゾ','1203');
+Insert into ADMIN.JAPMEDSTAT (NAME,VALUE) values ('シロドシン','4904');
 --------------------------------------------------------
 --  Constraints for Table JAPMEDSTAT
 --------------------------------------------------------
