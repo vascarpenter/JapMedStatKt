@@ -46,7 +46,7 @@ fun main(args: Array<String>) {
         val match = Regex("""^([a-zA-Z0-9]+)/([a-zA-Z0-9]+)@(.*)$""").find(ocistring)
         var jdbcuser = match!!.groups[1]!!.value
         var jdbcpass = match!!.groups[2]!!.value
-        var jdbcthinstr = "jdbc:oracle:thin:@//" +  match!!.groups[3]!!.value
+        var jdbcthinstr = "jdbc:oracle:thin:@" +  match!!.groups[3]!!.value
 
         conn = DriverManager.getConnection(jdbcthinstr, jdbcuser, jdbcpass)
 
