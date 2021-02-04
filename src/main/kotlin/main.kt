@@ -7,50 +7,67 @@ import java.sql.ResultSet
 import java.sql.Statement
 import java.sql.Connection
 import java.text.Normalizer
+import kotlin.system.exitProcess
 
-fun findName(conn:Connection , name:String): String {
-    var statement: Statement? = null
-    statement = conn?.createStatement()
-    var resultSet: ResultSet? = null
-    resultSet = statement?.executeQuery("SELECT VALUE FROM JAPMEDSTAT WHERE NAME='${name}'")
-    while(resultSet?.next() ?: false) {
-        var str = resultSet!!.getString(1)
-        resultSet?.close()
-        statement?.close()
-        return str
+data class DrugDB(var name:String, var value:String)
+
+fun findName(list: List<DrugDB>, name:String): String
+{
+    list.forEach {
+        if(it.name == name)
+        {
+            return it.value
+        }
     }
-    resultSet?.close()
-    statement?.close()
     return ""
 }
 
 fun main(args: Array<String>) {
     var conn: Connection? = null
-    var drugblock: Boolean = false
-    var dbstr: String = ""
-    var assessblock: Boolean = false
-    var abstr: String = ""
+    var drugblock = false
+    var dbstr = ""
+    var assessblock = false
+    var abstr = ""
 
     try {
-        if(args.size==0)
+        if(args.isEmpty())
         {
             System.err.println("usage: java -jar JapMedStatKt.jar <filename_sjis.txt>")
-            System.exit(1)
+            exitProcess(1)
         }
-        var file: File  = File(args[0])
+        val file = File(args[0])
         val bufferedReader = file.bufferedReader(Charset.forName("MS932"))
 
         // parse OCISTRING env variable and use IP/userid/pass
-        var ocistring = System.getenv("OCISTRING") ?: "user/pass@//localhost/XEPDB1"
+        val ocistring = System.getenv("OCISTRING") ?: "user/pass@//localhost/XEPDB1"
         val match = Regex("""^([a-zA-Z0-9]+)/([a-zA-Z0-9]+)@(.*)$""").find(ocistring)
-        var jdbcuser = match!!.groups[1]!!.value
-        var jdbcpass = match!!.groups[2]!!.value
-        var jdbcthinstr = "jdbc:oracle:thin:@" +  match!!.groups[3]!!.value
+        if(match==null)
+        {
+            System.err.println("please setenv OCISTRING as 'user/pass@//localhost/XEPDB1'")
+            exitProcess(1)
+        }
+        val jdbcuser = match.groups[1]!!.value
+        val jdbcpass = match.groups[2]!!.value
+        val jdbcthinstr = "jdbc:oracle:thin:@" +  match.groups[3]!!.value
 
         conn = DriverManager.getConnection(jdbcthinstr, jdbcuser, jdbcpass)
 
+        // read all data from db table to data class
+        val dbarray: MutableList<DrugDB> = mutableListOf()
+        val statement: Statement? = conn?.createStatement()
+        val resultSet: ResultSet? = statement?.executeQuery("SELECT NAME,VALUE FROM JAPMEDSTAT")
+        while(resultSet?.next() == true) {
+            val name = resultSet!!.getString(1)
+            val value = resultSet.getString(2)
+            val unit = DrugDB(name,value)
+            dbarray.add(unit)
+        }
+        resultSet?.close()
+        statement?.close()
+
+        // read all from file
         bufferedReader.readLines().forEach { line ->
-            var linex = line.trim()
+            val linex = line.trim()
             if (linex=="" || linex.startsWith("A)"))
             {
                 // skip
@@ -83,7 +100,7 @@ fun main(args: Array<String>) {
                 }
 
                 val match = Regex("""^([0-9]+)y([0-9]+)m(.*)$""").find(linex)
-                println("\n" + match!!.groups[1]!!.value+ "歳 " + match!!.groups[2]!!.value + "ヶ月  " + match!!.groups[3]!!.value)
+                println("\n" + match!!.groups[1]!!.value+ "歳 " + match.groups[2]!!.value + "ヶ月  " + match.groups[3]!!.value)
 
                 drugblock = true
             }
@@ -109,20 +126,20 @@ fun main(args: Array<String>) {
                     if (Regex("""([ァ-ンＡ-Ｚー塩化酸・]+)(.*)""").containsMatchIn(liney))
                     {
                         val match = Regex("""([ァ-ンＡ-Ｚー塩化酸・]+)(.*)""").find(liney)
-                        var matchstr1: String = match!!.groups[1]!!.value
-                        var matchstr = findName(conn, matchstr1)
+                        val matchstr1: String = match!!.groups[1]!!.value
+                        val matchstr = findName(dbarray, matchstr1)
                         if (matchstr != "")
                         {
-                            dbstr = dbstr + liney + "  " + matchstr + "\n"
+                            dbstr = "$dbstr$liney  $matchstr\n"
                         }
                         else
                         {
-                            dbstr = dbstr + liney + "  ?$matchstr1?\n"
+                            dbstr = "$dbstr$liney  ?$matchstr1?\n"
                         }
                     }
                     else
                     {
-                        dbstr = dbstr + liney + "\n"
+                        dbstr = "$dbstr$liney\n"
                     }
                 }
                 else if (assessblock)
