@@ -22,6 +22,7 @@ share/
 *.zip
 *.jar
 build/
+*.txt
 
 # Linux
 ### https://raw.github.com/github/gitignore/07c730e1fccfe0f92b29e039ba149d20bfb332e7/Global/Linux.gitignore
